@@ -1,4 +1,6 @@
 <Solution>
   <Project Path="DotNetTrainingEFCore.Database/DotNetTrainingEFCore.Database.csproj" />
+  <Project Path="DotNetTrainingEFCore.Database1/DotNetTrainingEFCore.Database1.csproj" Id="cff81daf-62d6-4c7d-b744-8676921ba574" />
   <Project Path="DotNetTrainingEFCore.Mvc/DotNetTrainingEFCore.Mvc.csproj" />
+  <Project Path="DotNetTrainingEFCore.Mvc1/DotNetTrainingEFCore.Mvc1.csproj" Id="e5e5e9e0-6c0a-43c9-808e-f5c264d6862f" />
 </Solution>

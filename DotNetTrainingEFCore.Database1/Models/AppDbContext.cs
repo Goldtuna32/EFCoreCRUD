@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace DotNetTrainingEFCore.Database.Models;
+namespace DotNetTrainingEFCore.Database1.Models;
 
 public partial class AppDbContext : DbContext
 {
@@ -16,7 +16,7 @@ public partial class AppDbContext : DbContext
     }
 
     public virtual DbSet<BlogTable> BlogTables { get; set; }
- 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<BlogTable>(entity =>

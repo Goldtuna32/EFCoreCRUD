@@ -1,42 +1,36 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+﻿using DotNetTrainingEFCore.Database1.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-namespace DotNetTrainingEFCore.Mvc.Controllers
+namespace DotNetTrainingEFCore.Mvc1.Controllers
 {
     public class BlogController : Controller
     {
-
         private readonly AppDbContext _db;
 
         public BlogController(AppDbContext db)
         {
             _db = db;
         }
-
         public async Task<IActionResult> Index()
         {
-            var blogs = await _db.BlogTable
+            var blog = await _db.BlogTables
                         .AsNoTracking()
-                        .OrderByDescending(x=> x.BlogId)
+                        .OrderByDescending(x => x.BlogId)
                         .ToListAsync();
-
-            return View(blogs);
+            return View(blog);
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save(BlogTable blogTable)
+        public async Task<IActionResult> Save(BlogTable blog)
         {
-            if (blogTable == null) 
-            {
-                return View("Blog table can't be null");
-            }
-            await _db.BlogTable.AddAsync(blogTable);
+            _db.BlogTables.Add(blog);
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -44,22 +38,18 @@ namespace DotNetTrainingEFCore.Mvc.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var blog = await _db.BlogTables
-                        .AsNoTracking()
-                        .FirstOrDefaultAsync(x => x.BlogId == id);
-            if (blog == null)
+            var item = await _db.BlogTables.FirstOrDefaultAsync(x=> x.BlogId == id);
+            if (item is null)
             {
                 return RedirectToAction("Index");
             }
-
-            return View(blog);
+            return View(item);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(int id,BlogTable blog)
+        public async Task<IActionResult> Update(int id, BlogTable blog)
         {
-            var item = await _db.BlogTables
-                        .FirstOrDefaultAsync(x=> x.BlogId ==id); 
+            var item = await _db.BlogTables.FirstOrDefaultAsync(x => x.BlogId == id);
             if (item is null)
             {
                 return RedirectToAction("Index");
@@ -74,8 +64,7 @@ namespace DotNetTrainingEFCore.Mvc.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var item = await _db.BlogTables
-                            .FirstOrDefaultAsync(x=> x.BlogId ==id);
+            var item = await _db.BlogTables.FirstOrDefaultAsync(x => x.BlogId == id);
             if (item is null)
             {
                 return RedirectToAction("Index");
