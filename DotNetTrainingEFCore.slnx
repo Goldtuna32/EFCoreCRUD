@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DotNetTrainingEFCore.Database/DotNetTrainingEFCore.Database.csproj" />
+  <Project Path="DotNetTrainingEFCore.Mvc/DotNetTrainingEFCore.Mvc.csproj" />
+</Solution>
